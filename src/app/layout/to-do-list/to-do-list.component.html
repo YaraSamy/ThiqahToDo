@@ -1,0 +1,39 @@
+<div id="to-do-container" class="bg-white m-auto">
+
+  <div class="d-flex flex-row w-100 align-items-center">
+    <div class="w-50">
+      <div class="d-flex flex-row">
+        <div class="day align-self-center">{{currentDate | date:'dd'}}</div>
+        <div class="d-flex flex-column align-self-center">
+          <div *ngIf="lang === 'en-US'" class="month">{{'months.' + currentMonth | translate | slice:0:3}}</div>
+          <div *ngIf="lang === 'ar-EG'" class="month">{{'months.' + currentMonth | translate}}</div>
+          <div class="year">{{currentDate | date:'YYYY'}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="w-50 text-align-end font-weight-bold text-uppercase align-self-center">
+      {{'days.' + currentDay | translate}}
+    </div>
+  </div>
+
+  <ul class="my-2">
+    <li *ngFor="let task of tasks; let i = index;" [class.checked]="task.checked">
+      <i [ngClass]="task.checked ? 'fas fa-check-circle' : 'far fa-circle'"
+         (click)="changeStatus(task)" title="Check"></i>
+      {{task.task}}
+      <i class="m-start-auto mx-1 icon-btn btn-primary fas fa-edit" (click)="editTask(task)" title="Edit"></i>
+      <i class="mx-1 icon-btn btn-warn fas fa-trash-alt" (click)="deleteTask(task, i)" title="Delete"></i>
+    </li>
+  </ul>
+
+  <form *ngIf="showForm" [formGroup]="form" (keydown.enter)="form.valid ? saveTask() : ''" class="my-2">
+    <div class="d-flex flex-row">
+      <input placeholder="write something..." formControlName="task">
+      <i (click)="form.valid ? saveTask() : ''" class="icon-btn btn-success fas fa-paper-plane border-bottom"></i>
+    </div>
+  </form>
+
+  <button type="button" class="btn main-btn"
+          (click)="showForm ? dismiss() : initForm()">{{showForm ? 'x' : '+'}}</button>
+
+</div>

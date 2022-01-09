@@ -1,0 +1,13 @@
+<div id="header-container">
+  <div class="bg-light py-2 slanted-bg-end grid-1 text-primary">
+    <i class="fab fa-twitter-square text-secondary align-self-center"></i>
+    <span class="align-self-center">{{'header.staffManagement' | translate}}</span>
+  </div>
+
+  <div class="bg-secondary py-2 slanted-bg-start grid-2">
+    <span class="align-self-center">{{'header.taskManagement' | translate}}</span>
+    <button class="btn m-start-auto text-white" (click)="changeLang()"><i class="fas fa-language"></i></button>
+  </div>
+
+  <img class="header-img" [src]="['assets/imgs/qrcode.png']" alt="qr-code">
+</div>
